@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mitsu Nikki · 3 cosas buenas</title>
+  <meta name="description" content="Diario nocturno de gratitud: tres cosas buenas de cada día.">
+  <meta name="theme-color" content="#141518">
+  <meta name="color-scheme" content="dark">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Símbolos reutilizables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="coma" d="M0,-10 A10,10 0 0 1 9.4,3.42 A7,7 0 0 0 0,-3.6 A3.2,3.2 0 0 1 0,-10 Z"/>
+      <g id="mitsudomoe">
+        <use href="#coma"/>
+        <use href="#coma" transform="rotate(120)"/>
+        <use href="#coma" transform="rotate(240)"/>
+      </g>
+      <symbol id="logo" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#D4AF37" stroke-width="2.6" stroke-dasharray="290 37" stroke-linecap="round" transform="rotate(-60 60 60)"/>
+        <g fill="none" stroke="#EAE6DF" stroke-width="5" stroke-linecap="round">
+          <path d="M12,28 Q60,37 108,28"/>
+          <path d="M20,54 L100,54"/>
+          <path d="M37,36 L34,102"/>
+          <path d="M83,36 L86,102"/>
+        </g>
+        <g transform="translate(60,42) scale(.78)"><use href="#mitsudomoe" fill="#D94E41"/></g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Fondo: luna y jardín zen -->
+  <svg class="ambient" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#EAE6DF" stop-opacity=".07"/>
+        <stop offset="1" stop-color="#EAE6DF" stop-opacity="0"/>
+      </radialGradient>
+      <mask id="creciente">
+        <rect width="400" height="800" fill="#fff"/>
+        <circle cx="336" cy="102" r="30" fill="#000"/>
+      </mask>
+    </defs>
+    <circle cx="322" cy="112" r="90" fill="url(#halo)"/>
+    <circle cx="322" cy="112" r="32" fill="#EAE6DF" opacity=".13" mask="url(#creciente)"/>
+    <g fill="none" stroke="#EAE6DF" stroke-width="1" opacity=".06">
+      <path d="M-20,650 Q30,642 80,650 T180,650 T280,650 T380,650 T480,650"/>
+      <path d="M-20,668 Q30,660 80,668 T180,668 T280,668 T380,668 T480,668"/>
+      <path d="M-20,686 Q30,678 80,686 T180,686 T280,686 T380,686 T480,686"/>
+      <path d="M-20,704 Q30,696 80,704 T180,704 T280,704 T380,704 T480,704"/>
+      <path d="M-20,722 Q30,714 80,722 T180,722 T280,722 T380,722 T480,722"/>
+      <path d="M-20,740 Q30,732 80,740 T180,740 T280,740 T380,740 T480,740"/>
+      <path d="M-20,758 Q30,750 80,758 T180,758 T280,758 T380,758 T480,758"/>
+      <path d="M-20,776 Q30,768 80,776 T180,776 T280,776 T380,776 T480,776"/>
+    </g>
+    <g fill="none" stroke="#EAE6DF" stroke-width="1" opacity=".08">
+      <ellipse cx="300" cy="712" rx="34" ry="13"/>
+      <ellipse cx="300" cy="712" rx="50" ry="21"/>
+      <ellipse cx="300" cy="712" rx="66" ry="29"/>
+    </g>
+    <ellipse cx="300" cy="710" rx="19" ry="8" fill="#2a2c32" opacity=".8"/>
+  </svg>
+
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-logo" aria-hidden="true"><use href="#logo"/></svg>
+      <div>
+        <div class="brand-jp">三つ日記</div>
+        <div class="brand-es">Mitsu Nikki</div>
+      </div>
+    </div>
+    <button class="icon-btn" id="open-settings" type="button" aria-label="Configuración y sincronización">
+      <span class="sync-dot" id="sync-dot" data-state="local"></span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <!-- HOY -->
+    <section class="view" id="view-today" aria-labelledby="greeting">
+      <p class="greeting" id="greeting">Buenas noches, tómate un respiro</p>
+      <div class="day-nav">
+        <button class="icon-btn small" id="prev-day" type="button" aria-label="Día anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <h1 class="date" id="date-label">—</h1>
+        <button class="icon-btn small" id="next-day" type="button" aria-label="Día siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <button class="link-btn" id="back-today" type="button" hidden>Volver a hoy</button>
+
+      <form id="today-form" class="things" autocomplete="off">
+        <label class="thing">
+          <span class="thing-num" aria-hidden="true">一</span>
+          <textarea rows="2" maxlength="600" placeholder="Un pequeño detalle que disfrutaste hoy…" aria-label="Primera cosa buena"></textarea>
+        </label>
+        <label class="thing">
+          <span class="thing-num" aria-hidden="true">二</span>
+          <textarea rows="2" maxlength="600" placeholder="Algo que hiciste bien o por ti…" aria-label="Segunda cosa buena"></textarea>
+        </label>
+        <label class="thing">
+          <span class="thing-num" aria-hidden="true">三</span>
+          <textarea rows="2" maxlength="600" placeholder="Un momento de calma o alegría…" aria-label="Tercera cosa buena"></textarea>
+        </label>
+
+        <button class="primary save-btn" id="save-btn" type="submit">
+          <svg class="enso" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40"/></svg>
+          <span class="save-label">Guardar y sincronizar</span>
+        </button>
+        <p class="hint" id="save-hint" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- CALENDARIO -->
+    <section class="view" id="view-calendar" hidden aria-labelledby="cal-title">
+      <div class="cal-head">
+        <button class="icon-btn small" id="cal-prev" type="button" aria-label="Mes anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <h1 class="cal-title" id="cal-title">—</h1>
+        <button class="icon-btn small" id="cal-next" type="button" aria-label="Mes siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="cal-week" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <p class="cal-stats" id="cal-stats"></p>
+      <div class="legend" aria-hidden="true">
+        <span><i class="lg-hanko"></i> 3 cosas</span>
+        <span><i class="lg-dot"></i> 1–2 cosas</span>
+      </div>
+
+      <article class="washi day-card" id="day-card" hidden aria-live="polite"></article>
+
+      <button class="omikuji-btn" id="omikuji-btn" type="button">
+        <span class="omikuji-jp">おみくじ</span>
+        <span>Recuerdo aleatorio</span>
+      </button>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Secciones">
+    <button class="tab active" data-view="today" type="button" aria-current="page"><span class="tab-jp">今日</span>Hoy</button>
+    <button class="tab" data-view="calendar" type="button"><span class="tab-jp">暦</span>Calendario</button>
+  </nav>
+
+  <!-- OMIKUJI -->
+  <dialog class="sheet omikuji" id="omikuji-dialog" aria-labelledby="omikuji-title">
+    <div class="slip washi">
+      <div class="slip-side" aria-hidden="true">御神籤</div>
+      <div class="slip-body">
+        <p class="slip-luck">大吉</p>
+        <h2 id="omikuji-title" class="slip-date"></h2>
+        <ol class="slip-items" id="omikuji-items"></ol>
+      </div>
+    </div>
+    <div class="row">
+      <button class="ghost" id="omikuji-again" type="button">Otro recuerdo</button>
+      <button class="primary" id="omikuji-close" type="button">Cerrar</button>
+    </div>
+  </dialog>
+
+  <!-- CONFIGURACIÓN -->
+  <dialog class="sheet" id="settings-dialog" aria-labelledby="settings-title">
+    <form method="dialog" id="settings-form" class="settings" autocomplete="off">
+      <header class="sheet-head">
+        <h2 id="settings-title">Configuración</h2>
+        <button class="icon-btn small" value="cancel" type="submit" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </header>
+
+      <fieldset>
+        <legend>Sincronización con GitHub</legend>
+        <p class="status-line" id="sync-status">Solo en este móvil</p>
+        <div class="grid2">
+          <label>Usuario<input name="owner" type="text" spellcheck="false" autocapitalize="off"></label>
+          <label>Repositorio<input name="repo" type="text" spellcheck="false" autocapitalize="off"></label>
+        </div>
+        <details class="adv">
+          <summary>Avanzado</summary>
+          <div class="grid2">
+            <label>Rama<input name="branch" type="text" spellcheck="false" autocapitalize="off"></label>
+            <label>Archivo<input name="path" type="text" spellcheck="false" autocapitalize="off"></label>
+          </div>
+        </details>
+        <label>Token de GitHub (PAT)
+          <span class="pw"><input name="token" type="password" spellcheck="false" autocapitalize="off" placeholder="github_pat_…"><button type="button" class="reveal" data-for="token" aria-label="Mostrar token">ver</button></span>
+        </label>
+        <label>Frase secreta de cifrado
+          <span class="pw"><input name="pass" type="password" spellcheck="false" autocapitalize="off" placeholder="Solo tú la sabes"><button type="button" class="reveal" data-for="pass" aria-label="Mostrar frase">ver</button></span>
+        </label>
+        <p class="note">Todo se guarda solo en este navegador. El diario se sube <strong>cifrado</strong>: sin la frase nadie puede leerlo, ni siquiera en GitHub. Si la pierdes, no se puede recuperar.</p>
+        <div class="row">
+          <button class="ghost" id="test-conn" type="button">Probar</button>
+          <button class="primary" id="save-settings" type="button">Conectar</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Recordatorio nocturno</legend>
+        <div class="row between">
+          <label class="switch"><input type="checkbox" name="notif"><span></span>Avisos</label>
+          <label class="time">Hora<input type="time" name="hour" value="21:00"></label>
+        </div>
+        <p class="note">El aviso del navegador llega si la app está abierta o en segundo plano. Para que te avise <strong>siempre</strong>, añádelo también a tu calendario:</p>
+        <div class="row wrap">
+          <button class="ghost" id="test-notif" type="button">Probar aviso</button>
+          <a class="ghost" id="gcal-link" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <button class="ghost" id="ics-btn" type="button">Descargar .ics</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Copia de seguridad</legend>
+        <p class="note">Exporta tu diario a un archivo (sin cifrar) o recupera uno anterior.</p>
+        <div class="row wrap">
+          <button class="ghost" id="export-btn" type="button">Exportar</button>
+          <label class="ghost file-btn">Importar<input type="file" id="import-input" accept="application/json,.json" hidden></label>
+          <button class="ghost danger" id="forget-btn" type="button">Olvidar token</button>
+        </div>
+      </fieldset>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

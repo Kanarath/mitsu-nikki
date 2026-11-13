@@ -1,1 +1,10 @@
-[]
+{
+ "app": "mitsu-nikki",
+ "v": 1,
+ "alg": "AES-GCM-256",
+ "kdf": "PBKDF2-SHA256",
+ "iter": 250000,
+ "salt": "ehk82lh4rmwMLhtnFqeWpw==",
+ "iv": "NHZhRneqMUt6XtMY",
+ "data": "Z+wf9jSc9lP8liPZAbxcRo1Dkj2w0uqycDCXCL+8iBWU2y+9y59lTjLFNlHIayYz788elqUbAsopRmrBnP5WJLb2rkgXddRSVX64pbwDIAJwbZPsxBWzwkr+skSCE+zn17cmAVvJkbQgfsA6Ty5PuesMxA+MpWZTdkoGAvwqvZNw4GPzZcK5HKzb1AMXql6heJ/SyFrnF12PxqiKyChKU/TldX89zN3j4q9ZpXPC0U6K3AJJwCrX+I1JInbe/ycDuWA54e/AQ0nzcnovxm3n6Td7CLcQL3hB1yhaW4re44J3quAuTEQ636NHZXM9PIzD5PJkeEsNFLYVcmRtSKZ9T0JtS/Fh5Z7bF4vMJmW+Skaka3x0ircC04DUhbuwmcnH4QXMGUeUbZZdai+uCkvL/9vfDr2z8mKQcXlPSGG/S51ofUkp/b7YIRGZWfw6oW0+tDOV"
+}
